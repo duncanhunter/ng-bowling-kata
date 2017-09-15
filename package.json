@@ -26,6 +26,9 @@
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
+    "jest": "^21.1.0",
+    "@types/jest": "^20.0.8",
+    "jest-preset-angular": "^3.0.1",
     "@angular/cli": "1.4.2",
     "@angular/compiler-cli": "^4.2.4",
     "@angular/language-service": "^4.2.4",
@@ -45,5 +48,12 @@
     "ts-node": "~3.2.0",
     "tslint": "~5.3.2",
     "typescript": "~2.3.3"
+  },
+  "jest": {
+    "preset": "jest-preset-angular",
+    "setupTestFrameworkScriptFile": "<rootDir>/src/setupJest.ts",
+    "transformIgnorePatterns": [
+      "node_modules/(?!angular)"
+    ]
   }
 }
