@@ -1,15 +1,12 @@
-module.exports = function (wallaby) {
 
+module.exports = function (wallaby) {
   var compilerOptions = Object.assign(
     require('./src/tsconfig.spec.json').compilerOptions);
 
   return {
     files: [
       'src/tsconfig.spec.json',
-      'src/setupJest.ts',
-      'src/app/**/*.ts',
-      'src/app/**/*.html',
-      'src/app/**/*.scss',
+      'src/**/*.+(ts|js|html|json)',
       '!src/app/**/*.spec.ts'
     ],
 
@@ -17,9 +14,9 @@ module.exports = function (wallaby) {
       'src/app/**/*.spec.ts'
     ],
 
-    		compilers: {
-			'**/*.ts': wallaby.compilers.typeScript(compilerOptions)
-		},
+    compilers: {
+      '**/*.ts': wallaby.compilers.typeScript(compilerOptions)
+    },
 
     env: {
       type: 'node',
@@ -27,6 +24,12 @@ module.exports = function (wallaby) {
     },
 
     testFramework: 'jest',
+
+    setup: function (wallaby) {
+      const jestConfig = require('./package.json').jest;
+      wallaby.testFramework.configure(jestConfig);
+    },
+
 
   };
 };
